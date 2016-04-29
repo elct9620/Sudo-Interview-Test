@@ -1,0 +1,26 @@
+{
+  "name": "sudo-interview-test",
+  "version": "1.0.0",
+  "description": "The interview test answser for Sudo.",
+  "main": "src/app.jsx",
+  "dependencies": {},
+  "devDependencies": {
+    "aoi": "0.0.1",
+    "babel-preset-es2015": "^6.6.0"
+  },
+  "scripts": {
+    "serve": "aoi serve -e src/app.jsx -o app.js -d ./dest -L babel -b ./public",
+    "build": "aoi build -e src/app.jsx -o app.js -d ./dest -L bable",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elct9620/Sudo-Interview-Test.git"
+  },
+  "author": "蒼時弦也",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/elct9620/Sudo-Interview-Test/issues"
+  },
+  "homepage": "https://github.com/elct9620/Sudo-Interview-Test#readme"
+}
