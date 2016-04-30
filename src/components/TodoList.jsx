@@ -76,9 +76,9 @@ export default class Todo extends React.Component {
             <div id="todo-list" class="todo-list">
                 <Header/>
                 <section id="main" role="main">
-                    <AddTodoItem placeholder="Type something here..." onAdd={this._onAdd.bind(this)} />
+                    <AddTodoItem placeholder="Type something..." onAdd={this._onAdd.bind(this)} />
                     <ListView data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete}>
-                        Oops, there is noting here...
+                        Oops, You got nothing to do.
                     </ListView>
                 </section>
             </div>
