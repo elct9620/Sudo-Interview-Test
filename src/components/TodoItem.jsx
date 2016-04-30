@@ -45,9 +45,9 @@ export default class TodoItem extends React.Component {
             onChange: this._onChange.bind(this)
         }
 
-        // TODO: Object state is too complex
+        // TODO: Object state is too complex, should refactor to only partner have active state
         let starIcon = this.props.starred ? "star" : "star-o";
-        let starClass = this.props.starred ? "item__control-button is-active" : "item__control-button";
+        let starClass = this.props.starred ? "item__control-button--star is-active" : "item__control-button--star";
         let completeIcon = this.props.completed ? "check-circle" : "check-circle-o";
 
         let entryClass = this.props.completed ? "item__entry is-completed" : "item__entry";
