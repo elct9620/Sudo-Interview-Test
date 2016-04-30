@@ -9,13 +9,11 @@ import TodoItem from './TodoItem.jsx';
 import AddTodoItem from './AddTodoItem.jsx';
 import ListView from './ListView.jsx';
 import StorageStore from '../store/SimpleStore';
+import SimpleRouter from '../helper/SimpeRouter';
 
 export default class Todo extends React.Component {
     constructor() {
         super();
-
-        let a = StorageStore.add("AAA")
-        let b = StorageStore.add("BBB")
 
         this.state = {
             tasks: StorageStore.getTasks(),
@@ -24,9 +22,15 @@ export default class Todo extends React.Component {
     }
 
     componentWillMount() {
-        StorageStore.on('add', this._updateTasks.bind(this))
-        StorageStore.on('update', this._updateTasks.bind(this))
-        StorageStore.on('destroy', this._updateTasks.bind(this))
+        StorageStore.on('add', this._updateTasks.bind(this));
+        StorageStore.on('update', this._updateTasks.bind(this));
+        StorageStore.on('destroy', this._updateTasks.bind(this));
+
+        SimpleRouter.on("page:changed", this._onPageChange.bind(this));
+    }
+
+    componentDidMount() {
+        SimpleRouter.dispatch(); // Refresh to show current page
     }
 
     _updateTasks() {
@@ -49,6 +53,21 @@ export default class Todo extends React.Component {
 
     _onComplete(task) {
         StorageStore.toggleComplete(task);
+    }
+
+    _onPageChange() {
+        let path = SimpleRouter.getPath();
+        let filter = {completed: false, stared: false};
+        switch(path) {
+            case "/completed":
+              filter.completed = true;
+              break;
+            case "/stared":
+              filter.stared = true;
+              break;
+        }
+        // TODO: Should not do this
+        this.setState({filter: filter, tasks: StorageStore.getTasks(filter)});
     }
 
     render() {
