@@ -13,7 +13,7 @@ import SimpleRouter from './helper/SimpeRouter';
 // Simple register router, do nothing because TodoList will check it path to switch filter
 SimpleRouter.register('/', () => {});
 SimpleRouter.register('/completed', () => {});
-SimpleRouter.register('/stared', () => {});
+SimpleRouter.register('/starred', () => {});
 SimpleRouter.register('/active', () => {});
 
 // Render React Component After document loaded

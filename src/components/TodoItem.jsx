@@ -44,7 +44,7 @@ export default class TodoItem extends React.Component {
             onChange: this._onChange.bind(this)
         }
 
-        let starIcon = this.props.stared ? "star" : "star-o";
+        let starIcon = this.props.starred ? "star" : "star-o";
         let completeIcon = this.props.completed ? "check-circle" : "check-circle-o";
 
         let entryClass = this.props.completed ? "entry__completed" : "entry";

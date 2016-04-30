@@ -17,7 +17,7 @@ export default class Todo extends React.Component {
 
         this.state = {
             tasks: StorageStore.getTasks(),
-            filter: {completed: false, started: false}
+            filter: {completed: false, started: false, active: false}
         };
     }
 
@@ -56,14 +56,16 @@ export default class Todo extends React.Component {
 
     _onPageChange() {
         let path = SimpleRouter.getPath();
-        let filter = {completed: false, stared: false};
+        let filter = {completed: false, starred: false, active: false};
         switch(path) {
             case "/completed":
               filter.completed = true;
               break;
-            case "/stared":
-              filter.stared = true;
+            case "/starred":
+              filter.starred = true;
               break;
+            case "/active":
+              filter.active = true;
         }
         // TODO: Should not do this
         this.setState({filter: filter, tasks: StorageStore.getTasks(filter)});

@@ -8,10 +8,10 @@ import {EventEmitter} from 'events';
 
 // Simple Todo Item
 class Todo {
-    constructor(task, completed = false, stared = false) {
+    constructor(task, completed = false, starred = false) {
         this.task = task;
         this.completed = completed;
-        this.stared = stared;
+        this.starred = starred;
     }
 }
 
@@ -34,13 +34,13 @@ class SimpleStore extends EventEmitter{
      *
      * @param string task content
      * @param bool mark task as completed
-     * @param bool mark task as stared
+     * @param bool mark task as starred
      * @return Todo the result, if failed should return null
      */
 
-    add(task, completed = false, stared = false) {
+    add(task, completed = false, starred = false) {
         if(task && task.length > 0) {
-            let todo = new Todo(task, completed, stared);
+            let todo = new Todo(task, completed, starred);
             this.tasks.push(todo);
             this.emit("add", todo);
             this.saveTask();
@@ -56,10 +56,11 @@ class SimpleStore extends EventEmitter{
      * @param object the filter to select specify marked task
      * @return array the matched task
      */
-    getTasks(filter = {completed: false, stared: false}) {
+    getTasks(filter = {completed: false, starred: false}) {
         return this.tasks.filter((item) => {
             if(filter.completed && !item.completed) { return false; }
-            if(filter.stared && !item.stared) { return false; }
+            if(filter.starred && !item.starred) { return false; }
+            if(filter.active && item.completed) { return false; }
             return true;
         });
     }
@@ -73,7 +74,7 @@ class SimpleStore extends EventEmitter{
     toggleStar(todo) {
         this.tasks = this.tasks.map((task, index) => {
            if(todo == task) {
-                return new Todo(todo.task, todo.completed, !todo.stared);
+                return new Todo(todo.task, todo.completed, !todo.starred);
            }
            return task;
         });
@@ -90,7 +91,7 @@ class SimpleStore extends EventEmitter{
     toggleComplete(todo) {
         this.tasks = this.tasks.map((task, index) => {
             if(todo == task) {
-                return new Todo(todo.task, !todo.completed, todo.stared);
+                return new Todo(todo.task, !todo.completed, todo.starred);
             }
             return task;
         });
@@ -128,7 +129,7 @@ class StorageStore extends SimpleStore {
         let tasks = [];
         if(tasks = JSON.parse(tasksString)) {
             tasks = tasks.map((task) => {
-                return new Todo(task.task, task.completed, task.stared)
+                return new Todo(task.task, task.completed, task.starred)
             })
         }
         this.tasks = tasks || [];
