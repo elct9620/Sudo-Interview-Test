@@ -8,7 +8,7 @@ export default class TodoItem extends React.Component {
     render() {
         return (
             <div class="item">
-                @TodoItem
+                @TodoItem : {this.props.task}
             </div>
         )
     }
