@@ -30,6 +30,13 @@ export default class ListView extends React.Component {
         }
     }
 
+    _onUpdate(item) {
+        return (task) => {
+            if(typeof this.props.onUpdate !== "function") return;
+            this.props.onUpdate(item, task);
+        }
+    }
+
     getList() {
         if(this.props.data.length > 0) {
             // TODO: ListView should accept any type component
@@ -39,7 +46,8 @@ export default class ListView extends React.Component {
                     key: index,
                     onStar: this._onStar.call(this, item),
                     onDestroy: this._onDestroy.call(this, item),
-                    onComplete: this._onComplete.call(this, item)
+                    onComplete: this._onComplete.call(this, item),
+                    onUpdate: this._onUpdate.call(this, item)
                 }
 
                 props = Object.assign(item, props) // Direct copy props

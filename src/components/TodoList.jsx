@@ -54,6 +54,10 @@ export default class Todo extends React.Component {
         StorageStore.toggleComplete(task);
     }
 
+    _onUpdate(task, content) {
+        StorageStore.update(task, content);
+    }
+
     _onPageChange() {
         let path = SimpleRouter.getPath();
         let filter = {completed: false, starred: false, active: false};
@@ -77,7 +81,7 @@ export default class Todo extends React.Component {
                 <Header/>
                 <section id="main" role="main">
                     <AddTodoItem placeholder="Type something..." onAdd={this._onAdd.bind(this)} />
-                    <ListView data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete}>
+                    <ListView data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete} onUpdate={this._onUpdate}>
                         Oops, You got nothing to do.
                     </ListView>
                 </section>

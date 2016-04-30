@@ -100,6 +100,25 @@ class SimpleStore extends EventEmitter{
     }
 
     /**
+     * Update
+     *
+     * @param Todo object to update
+     * @param string new task content
+     * @return Todo
+     */
+
+    update(todo, content) {
+        this.tasks = this.tasks.map((task, index) => {
+            if(todo == task) {
+                return new Todo(content, todo.completed, todo.starred);
+            }
+            return task;
+        });
+        this.saveTask();
+        this.emit("update", this.tasks);
+    }
+
+    /**
      * Destroy
      *
      * @param Todo object to remote

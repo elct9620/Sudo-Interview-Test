@@ -28,6 +28,9 @@ export default class TodoItem extends React.Component {
 
     _onBlur(e) {
         this.setState({editMode: false});
+        if(typeof this.props.onUpdate == "function") {
+            this.props.onUpdate(this.state.task);
+        }
     }
 
     _onChange(e) {
