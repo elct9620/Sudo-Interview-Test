@@ -7,6 +7,10 @@ html, body {
 body {
   color: $fontColor;
   background: linear-gradient($bgGradientTop, $bgGradientBottom);
+
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
 }
 
 #todo-list {
@@ -15,8 +19,6 @@ body {
   margin: 2em auto;
 }
 
-.entry__completed {
-  input {
-    text-decoration: line-through;
-  }
+#main {
+  margin-top: 2em;
 }

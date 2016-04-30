@@ -25,6 +25,7 @@ export default class AddTodoItem extends TodoItem {
         let inputProps = {
             ref: "input",
             value: this.state.task,
+            className: "item__input",
             placeholder: this.props.placeholder,
             disabled: !this.state.editMode,
             onClick: this._onClick.bind(this),
@@ -34,11 +35,11 @@ export default class AddTodoItem extends TodoItem {
         }
        return (
             <div className="item">
-                <div className="entry">
+                <div className="item__entry">
                     <input type="text" {...inputProps}/>
                 </div>
-                <div className="control">
-                    <IconButton onClick={this._onAdd.bind(this)} icon="plus"/>
+                <div className="item__control is-active">
+                    <IconButton className="item__control-button is-active" onClick={this._onAdd.bind(this)} icon="plus"/>
                 </div>
             </div>
         )

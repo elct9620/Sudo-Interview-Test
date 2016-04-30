@@ -17,7 +17,7 @@ export default class IconButton extends React.Component {
         let iconClass = ["fa"]
         iconClass.push(`fa-${this.props.icon}`)
         return (
-            <button onClick={this.props.onClick}>
+            <button onClick={this.props.onClick} className={this.props.className}>
                 <i className={iconClass.join(" ")}></i>
             </button>
         )

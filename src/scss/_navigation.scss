@@ -2,6 +2,10 @@
 
 @include block('menu') {
 
+  clear: both;
+  overflow: hidden;
+  zoom: 0;
+
   @include element('list') {
     clear: both;
 

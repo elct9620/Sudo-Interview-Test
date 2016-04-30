@@ -6,6 +6,9 @@
 // Mixins
 @import "vendor/bemify";
 
+// CSS Reset
+@import "vendor/normalize";
+
 // Basic
 @import "settings";
 @import "base";
@@ -14,3 +17,4 @@
 // NOTE: For simple structure, I didn't split module into different directory
 
 @import "navigation";
+@import "item";

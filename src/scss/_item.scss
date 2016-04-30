@@ -1,0 +1,95 @@
+// Todo Item
+
+@include block("item") {
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  color: $activeColor;
+
+  background: $itemBg;
+  border-bottom: 1px solid $borderColor;
+
+  @include element("input") {
+    min-width: 100%;
+    padding: 1em 1.25em;
+
+    border: none;
+    color: $activeColor;
+
+    @include state("completed") {
+      color: $deactiveColor;
+      text-decoration: line-through;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  @include element("entry") {
+    width: 100%; // Fill remain space
+  }
+
+  @include element("complete") {
+    width: 3em;
+    margin-right: -0.5em;
+
+    text-align: center;
+  }
+
+  @include element("complete-button") {
+    font-size: 24px;
+
+    border: none;
+    background: transparent;
+    color: $activeColor;
+
+    @include state("completed") {
+      color: $deactiveColor;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  @include element("control") {
+    width: 3em;
+    text-align: center;
+
+    opacity: 0;
+
+    @include state("active") {
+      opacity: 1;
+    }
+  }
+
+  @include element("control-button") {
+    display: inline-flex;
+
+    border: none;
+    background: transparent;
+
+    color: $deactiveColor;
+
+    @include state("active") {
+      color: $activeColor;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &:hover {
+    margin-bottom: 2px;
+    box-shadow: 0px 1px 2px 1px $shadowColor;
+
+    .item__control { // TODO: Need to fix this
+      opacity: 1;
+    }
+  }
+
+}
