@@ -4,7 +4,7 @@
  * @author Zheng Xian Qiu
  */
 
-import './style.scss'; // Load global stylesheet
+import './scss/style.scss'; // Load global stylesheet
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './components/TodoList.jsx';

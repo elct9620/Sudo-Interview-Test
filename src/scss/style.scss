@@ -1,0 +1,16 @@
+/***
+ * Global Style
+ */
+
+
+// Mixins
+@import "vendor/bemify";
+
+// Basic
+@import "settings";
+@import "base";
+
+// Modules
+// NOTE: For simple structure, I didn't split module into different directory
+
+@import "navigation";

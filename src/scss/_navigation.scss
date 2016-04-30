@@ -1,0 +1,32 @@
+// Navigation
+
+@include block('menu') {
+
+  @include element('list') {
+    clear: both;
+
+    list-style: none;
+  }
+
+  @include element('item') {
+    display: inline-block;
+
+    // Direct specify size, not suggest do this
+    float: left;
+    width: 25%;
+  }
+
+  @include element('link') {
+    color: $fontColor;
+    text-decoration: none;
+
+    @include state('active') {
+      color: $activeColor;
+    }
+
+    &:hover {
+      color: $activeColor;
+    }
+  }
+
+}
