@@ -43,14 +43,23 @@ export default class TodoItem extends React.Component {
             onBlur: this._onBlur.bind(this),
             onChange: this._onChange.bind(this)
         }
+
+        let starIcon = this.props.stared ? "star" : "star-o";
+        let completeIcon = this.props.completed ? "check-circle" : "check-circle-o";
+
+        let entryClass = this.props.completed ? "entry__completed" : "entry";
+
         return (
-            <div class="item">
-                <div class="entry">
+            <div className="item">
+                <div className="complete">
+                    <IconButton icon={completeIcon} onClick={this.props.onComplete}/>
+                </div>
+                <div className={entryClass}>
                     <input type="text" {...inputProps}/>
                 </div>
-                <div class="control">
-                    <IconButton icon="star" />
-                    <IconButton icon="trash"/>
+                <div className="control">
+                    <IconButton icon={starIcon} onClick={this.props.onStar} />
+                    <IconButton icon="trash-o" onClick={this.props.onDestroy}/>
                 </div>
             </div>
         )

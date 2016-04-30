@@ -33,11 +33,11 @@ export default class AddTodoItem extends TodoItem {
             onKeyUp: this._onKeyUp.bind(this)
         }
        return (
-            <div class="item">
-                <div class="entry">
+            <div className="item">
+                <div className="entry">
                     <input type="text" {...inputProps}/>
                 </div>
-                <div class="control">
+                <div className="control">
                     <IconButton onClick={this._onAdd.bind(this)} icon="plus"/>
                 </div>
             </div>

@@ -2,3 +2,9 @@
  * Global Style
  */
 
+
+.entry__completed {
+  input {
+    text-decoration: line-through;
+  }
+}

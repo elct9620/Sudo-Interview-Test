@@ -8,10 +8,10 @@ import {EventEmitter} from 'events';
 
 // Simple Todo Item
 class Todo {
-    constructor(task, completed = false, started = false) {
+    constructor(task, completed = false, stared = false) {
         this.task = task;
         this.completed = completed;
-        this.started = started;
+        this.stared = stared;
     }
 }
 
@@ -26,13 +26,13 @@ class SimpleStore extends EventEmitter{
      *
      * @param string task content
      * @param bool mark task as completed
-     * @param bool mark task as started
+     * @param bool mark task as stared
      * @return Todo the result, if failed should return null
      */
 
-    add(task, completed = false, started = false) {
+    add(task, completed = false, stared = false) {
         if(task && task.length > 0) {
-            let todo = new Todo(task, completed, started);
+            let todo = new Todo(task, completed, stared);
             this.tasks.push(todo);
             this.emit("add", todo);
             return todo;
@@ -47,13 +47,61 @@ class SimpleStore extends EventEmitter{
      * @param object the filter to select specify marked task
      * @return array the matched task
      */
-    getTasks(filter = {completed: false, started: false}) {
+    getTasks(filter = {completed: false, stared: false}) {
         return this.tasks.filter((item) => {
             if(filter.completed && !item.completed) { return false; }
-            if(filter.started && !item.started) { return false; }
+            if(filter.stared && !item.stared) { return false; }
             return true;
         });
     }
+
+    /**
+     * Toggle Star
+     *
+     * @param Todo object to toggle star state
+     */
+
+    toggleStar(todo) {
+        this.tasks = this.tasks.map((task, index) => {
+           if(todo == task) {
+                return new Todo(todo.task, todo.completed, !todo.stared);
+           }
+           return task;
+        });
+        this.emit("update", this.tasks);
+    }
+
+    /**
+     * Toggle Complete
+     *
+     * @param Todo object to toggle complete state
+     */
+
+    toggleComplete(todo) {
+        this.tasks = this.tasks.map((task, index) => {
+            if(todo == task) {
+                return new Todo(todo.task, !todo.completed, todo.started);
+            }
+            return task;
+        });
+        this.emit("update", this.tasks);
+    }
+
+    /**
+     * Destroy
+     *
+     * @param Todo object to remote
+     */
+
+    destroy(todo) {
+        let index = this.tasks.indexOf(todo);
+        if(index >= 0) {
+            this.tasks.splice(index, 1);
+            this.emit("destroy", todo);
+        }
+        return todo;
+    }
+
 }
 
 
