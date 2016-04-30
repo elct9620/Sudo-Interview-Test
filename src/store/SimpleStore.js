@@ -80,7 +80,7 @@ class SimpleStore extends EventEmitter{
     toggleComplete(todo) {
         this.tasks = this.tasks.map((task, index) => {
             if(todo == task) {
-                return new Todo(todo.task, !todo.completed, todo.started);
+                return new Todo(todo.task, !todo.completed, todo.stared);
             }
             return task;
         });
