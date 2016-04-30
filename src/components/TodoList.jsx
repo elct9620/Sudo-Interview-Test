@@ -8,7 +8,7 @@ import Header from './Header.jsx';
 import TodoItem from './TodoItem.jsx';
 import AddTodoItem from './AddTodoItem.jsx';
 import ListView from './ListView.jsx';
-import StorageStore from '../store/SimpleStore';
+import {storageStore as StorageStore} from '../store/SimpleStore';
 import SimpleRouter from '../helper/SimpeRouter';
 
 export default class Todo extends React.Component {
@@ -34,13 +34,12 @@ export default class Todo extends React.Component {
     }
 
     _updateTasks() {
-        let filter = this.state.filetr;
+        let filter = this.state.filter;
         this.setState({tasks: StorageStore.getTasks(filter)});
     }
 
     _onAdd(value) {
         StorageStore.add(value);
-        this._updateTasks();
     }
 
     _onStar(task) {

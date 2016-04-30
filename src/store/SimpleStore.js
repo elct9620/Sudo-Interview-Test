@@ -18,7 +18,15 @@ class Todo {
 class SimpleStore extends EventEmitter{
     constructor() {
         super();
-        this.tasks = []
+        this.loadTask();
+    }
+
+    loadTask() {
+        return [];
+    }
+
+    saveTask() {
+        // Do nothing
     }
 
     /**
@@ -35,6 +43,7 @@ class SimpleStore extends EventEmitter{
             let todo = new Todo(task, completed, stared);
             this.tasks.push(todo);
             this.emit("add", todo);
+            this.saveTask();
             return todo;
         }
 
@@ -68,6 +77,7 @@ class SimpleStore extends EventEmitter{
            }
            return task;
         });
+        this.saveTask();
         this.emit("update", this.tasks);
     }
 
@@ -84,6 +94,7 @@ class SimpleStore extends EventEmitter{
             }
             return task;
         });
+        this.saveTask();
         this.emit("update", this.tasks);
     }
 
@@ -99,6 +110,7 @@ class SimpleStore extends EventEmitter{
             this.tasks.splice(index, 1);
             this.emit("destroy", todo);
         }
+        this.saveTask();
         return todo;
     }
 
@@ -107,9 +119,26 @@ class SimpleStore extends EventEmitter{
 
 // Yet another implement use localStorage API
 class StorageStore extends SimpleStore {
+    constructor() {
+        super();
+    }
 
+    loadTask() {
+        let tasksString = window.localStorage.getItem('tasks');
+        let tasks = [];
+        if(tasks = JSON.parse(tasksString)) {
+            tasks = tasks.map((task) => {
+                return new Todo(task.task, task.completed, task.stared)
+            })
+        }
+        this.tasks = tasks || [];
+    }
+
+    saveTask() {
+        window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    }
 }
 
 // Export Store Instance
 export default SimpleStore = new SimpleStore();
-export let StoragetStore = new StorageStore();
+export let storageStore = new StorageStore();
