@@ -6,7 +6,7 @@ html, body {
 
 body {
   color: $fontColor;
-  background: linear-gradient($bgGradientTop, $bgGradientBottom);
+  background: linear-gradient($bgGradientTop, $bgGradientBottom) fixed;
 
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
