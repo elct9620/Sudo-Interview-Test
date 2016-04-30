@@ -4,6 +4,8 @@
  * The simplest way to implement a data store use in-memory javascript object.
  */
 
+import {EventEmitter} from 'events';
+
 // Simple Todo Item
 class Todo {
     constructor(task, completed = false, started = false) {
@@ -13,8 +15,9 @@ class Todo {
     }
 }
 
-export default class SimpleStore {
+class SimpleStore extends EventEmitter{
     constructor() {
+        super();
         this.tasks = []
     }
 
@@ -31,6 +34,7 @@ export default class SimpleStore {
         if(task && task.length > 0) {
             let todo = new Todo(task, completed, started);
             this.tasks.push(todo);
+            this.emit("add", todo);
             return todo;
         }
 
@@ -52,8 +56,12 @@ export default class SimpleStore {
     }
 }
 
+
 // Yet another implement use localStorage API
-export class StorageStore extends SimpleStore {
+class StorageStore extends SimpleStore {
 
 }
 
+// Export Store Instance
+export default SimpleStore = new SimpleStore();
+export let StoragetStore = new StorageStore();

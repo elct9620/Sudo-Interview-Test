@@ -8,20 +8,30 @@ import Header from './Header.jsx';
 import TodoItem from './TodoItem.jsx';
 import AddTodoItem from './AddTodoItem.jsx';
 import ListView from './ListView.jsx';
-import SimpleStore from '../store/SimpleStore';
+import StorageStore from '../store/SimpleStore';
 
 export default class Todo extends React.Component {
     constructor() {
         super();
-        // TODO: Should not do this in next version
-        this.state = new SimpleStore(); // Direct mount SimpleStore as Component state
-        this.state.add("Test")
-        this.state.add("HIHI")
+
+        this.state = {
+            tasks: StorageStore.getTasks(),
+            filter: {completed: false, started: false}
+        };
+    }
+
+    componentWillMount() {
+        StorageStore.on('add', this._updateTasks.bind(this))
+    }
+
+    _updateTasks() {
+        let filter = this.state.filetr;
+        this.setState({tasks: StorageStore.getTasks(filter)});
     }
 
     _onAdd(value) {
-        this.state.add(value)
-        this.forceUpdate();
+        StorageStore.add(value)
+        this._updateTasks();
     }
 
     render() {
@@ -30,7 +40,7 @@ export default class Todo extends React.Component {
                 <Header/>
                 <section id="main" role="main">
                     <AddTodoItem placeholder="Type something here..." onAdd={this._onAdd.bind(this)} />
-                    <ListView data={this.state.getTasks()}>
+                    <ListView data={this.state.tasks}>
                         Oops, there is noting here...
                     </ListView>
                 </section>

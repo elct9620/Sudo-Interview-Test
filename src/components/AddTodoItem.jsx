@@ -15,6 +15,12 @@ export default class AddTodoItem extends TodoItem {
         this.setState({task: ""}); // Clear input
     }
 
+    _onKeyUp(e) {
+        if(e.keyCode == 13) { // Handle Enter
+            this._onAdd();
+        }
+    }
+
     render() {
         let inputProps = {
             ref: "input",
@@ -23,7 +29,8 @@ export default class AddTodoItem extends TodoItem {
             disabled: !this.state.editMode,
             onClick: this._onClick.bind(this),
             onBlur: this._onBlur.bind(this),
-            onChange: this._onChange.bind(this)
+            onChange: this._onChange.bind(this),
+            onKeyUp: this._onKeyUp.bind(this)
         }
        return (
             <div class="item">
