@@ -6,7 +6,7 @@ html, body {
 
 body {
   color: $fontColor;
-  background: linear-gradient($bgGradientTop, $bgGradientBottom) fixed;
+  background: linear-gradient($bgGradientTop, $bgGradientTop 241px, $bgGradientBottom) fixed; // Fixed header height to cover todo list items
 
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
@@ -24,7 +24,7 @@ body {
 }
 
 #header {
-  transform: translateY(0px);
+  background: $bgGradientTop;
 
   &.is-fixed {
     width: 40%;
@@ -32,6 +32,10 @@ body {
     top: 0;
 
     transform: translateY(-98px);
+
+    .virtualBG {
+      top: 98px;
+    }
   }
 }
 
@@ -41,7 +45,7 @@ body {
 
 #main {
   &.is-fixed {
-    margin-top: 202px;
+    margin-top: 241px;
   }
 }
 
@@ -56,8 +60,21 @@ body {
 
   text-align: center;
 
+  overflow: hidden;
+
   @include element("subtitle") {
     font-size: 14px;
     font-size: 0.875rem;
   }
+}
+
+.empty-state {
+  margin-top: 1em;
+  margin-left: -10%;
+  margin-right: -10%;
+
+  text-align: center;
+  color: $activeColor;
+  font-size: 36px;
+  font-size: 2.25rem;
 }

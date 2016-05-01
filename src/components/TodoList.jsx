@@ -105,7 +105,9 @@ export default class Todo extends React.Component {
                 </Header>
                 <section id="main" role="main" className={isFixedClass}>
                     <ListView fixedTop={this.state.fixedTop} data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete} onUpdate={this._onUpdate}>
-                        Oops, You got nothing to do.
+                        <div className="empty-state">
+                            Oops, You got nothing to do.
+                        </div>
                     </ListView>
                 </section>
             </div>
