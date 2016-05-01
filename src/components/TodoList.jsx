@@ -40,16 +40,16 @@ export default class Todo extends React.Component {
         if(this.scrollEventHandable === false) return; // Do nothing if last tick not finished
         this.scrollEventHandable = false;
 
-        let scrollTop = document.body.scrollTop;
-        let stickyPosition = 110;
-
-        if(scrollTop >= stickyPosition) {
-            this.setState({fixedTop: true});
-        } else {
-            this.setState({fixedTop: false});
-        }
-
         setTimeout(() => {
+            let scrollTop = document.body.scrollTop;
+            let stickyPosition = 110;
+
+            if(scrollTop >= stickyPosition) {
+                this.setState({fixedTop: true});
+            } else {
+                this.setState({fixedTop: false});
+            }
+
             this.scrollEventHandable = true;
         }, 100); // Run one tick per 0.1 seconds
     }
