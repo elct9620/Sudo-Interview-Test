@@ -8,7 +8,8 @@ import {EventEmitter} from 'events';
 
 // Simple Todo Item
 class Todo {
-    constructor(task, completed = false, starred = false) {
+    constructor(task, completed = false, starred = false, id = null) {
+        this.id = id || (new Date()).getTime() ;
         this.task = task;
         this.completed = completed;
         this.starred = starred;
@@ -74,7 +75,7 @@ class SimpleStore extends EventEmitter{
     toggleStar(todo) {
         this.tasks = this.tasks.map((task, index) => {
            if(todo == task) {
-                return new Todo(todo.task, todo.completed, !todo.starred);
+                return new Todo(todo.task, todo.completed, !todo.starred, todo.id);
            }
            return task;
         });
@@ -91,7 +92,7 @@ class SimpleStore extends EventEmitter{
     toggleComplete(todo) {
         this.tasks = this.tasks.map((task, index) => {
             if(todo == task) {
-                return new Todo(todo.task, !todo.completed, todo.starred);
+                return new Todo(todo.task, !todo.completed, todo.starred, todo.id);
             }
             return task;
         });
@@ -111,7 +112,7 @@ class SimpleStore extends EventEmitter{
         if(content && content.length > 0) { // Save only todo has content
             this.tasks = this.tasks.map((task, index) => {
                 if(todo == task) {
-                    return new Todo(content, todo.completed, todo.starred);
+                    return new Todo(content, todo.completed, todo.starred, todo.id);
                 }
                 return task;
             });
@@ -150,7 +151,7 @@ class StorageStore extends SimpleStore {
         let tasks = [];
         if(tasks = JSON.parse(tasksString)) {
             tasks = tasks.map((task) => {
-                return new Todo(task.task, task.completed, task.starred)
+                return new Todo(task.task, task.completed, task.starred, task.id)
             })
         }
         this.tasks = tasks || [];

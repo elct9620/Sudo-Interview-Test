@@ -44,7 +44,7 @@ export default class ListView extends React.Component {
             let props = {}
             let items = this.props.data.map((item, index) => {
                 props = {
-                    key: index,
+                    key: item.id || index,
                     onStar: this._onStar.call(this, item),
                     onDestroy: this._onDestroy.call(this, item),
                     onComplete: this._onComplete.call(this, item),
