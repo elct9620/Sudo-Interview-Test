@@ -17,7 +17,8 @@ export default class Todo extends React.Component {
 
         this.state = {
             tasks: StorageStore.getTasks(),
-            filter: {completed: false, started: false, active: false}
+            filter: {completed: false, started: false, active: false},
+            fixedTop: false
         };
     }
 
@@ -27,10 +28,30 @@ export default class Todo extends React.Component {
         StorageStore.on('destroy', this._updateTasks.bind(this));
 
         SimpleRouter.on("page:changed", this._onPageChange.bind(this));
+
+        document.addEventListener("scroll", this._onScroll.bind(this));
     }
 
     componentDidMount() {
         SimpleRouter.dispatch(); // Refresh to show current page
+    }
+
+    _onScroll(e) {
+        if(this.scrollEventHandable === false) return; // Do nothing if last tick not finished
+        this.scrollEventHandable = false;
+
+        let scrollTop = document.body.scrollTop;
+        let stickyPosition = 110;
+
+        if(scrollTop >= stickyPosition) {
+            this.setState({fixedTop: true});
+        } else {
+            this.setState({fixedTop: false});
+        }
+
+        setTimeout(() => {
+            this.scrollEventHandable = true;
+        }, 100); // Run one tick per 0.1 seconds
     }
 
     _updateTasks() {
@@ -76,12 +97,14 @@ export default class Todo extends React.Component {
     }
 
     render() {
+        let isFixedClass = this.state.fixedTop ? "is-fixed" : "";
         return (
             <div id="todo-list" class="todo-list">
-                <Header/>
-                <section id="main" role="main">
+                <Header fixedTop={this.state.fixedTop}>
                     <AddTodoItem placeholder="Type something..." onAdd={this._onAdd.bind(this)} />
-                    <ListView data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete} onUpdate={this._onUpdate}>
+                </Header>
+                <section id="main" role="main" className={isFixedClass}>
+                    <ListView fixedTop={this.state.fixedTop} data={this.state.tasks} onStar={this._onStar} onDestroy={this._onDestroy} onComplete={this._onComplete} onUpdate={this._onUpdate}>
                         Oops, You got nothing to do.
                     </ListView>
                 </section>

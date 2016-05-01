@@ -23,8 +23,26 @@ body {
   margin: 2em auto;
 }
 
+#header {
+  transform: translateY(0px);
+
+  &.is-fixed {
+    width: 40%;
+    position: fixed;
+    top: 0;
+
+    transform: translateY(-98px);
+  }
+}
+
+#main-menu {
+  margin-bottom: 2em;
+}
+
 #main {
-  margin-top: 2em;
+  &.is-fixed {
+    margin-top: 202px;
+  }
 }
 
 // Header
