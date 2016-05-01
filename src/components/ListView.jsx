@@ -47,7 +47,8 @@ export default class ListView extends React.Component {
                     onStar: this._onStar.call(this, item),
                     onDestroy: this._onDestroy.call(this, item),
                     onComplete: this._onComplete.call(this, item),
-                    onUpdate: this._onUpdate.call(this, item)
+                    onUpdate: this._onUpdate.call(this, item),
+                    higher: true
                 }
 
                 props = Object.assign(item, props) // Direct copy props

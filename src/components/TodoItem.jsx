@@ -56,8 +56,10 @@ export default class TodoItem extends React.Component {
         let entryClass = this.props.completed ? "item__entry is-completed" : "item__entry";
         let completeButtonClass = this.props.completed ? "item__complete-button is-completed" : "item__complete-button";
 
+        let itemClass = this.props.higher ? "item--higher" : "item";
+
         return (
-            <div className="item">
+            <div className={itemClass}>
                 <div className="item__complete">
                     <IconButton className={completeButtonClass} icon={completeIcon} onClick={this.props.onComplete}/>
                 </div>

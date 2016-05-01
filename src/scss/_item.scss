@@ -1,6 +1,6 @@
 // Todo Item
 
-@include block("item") {
+%item {
   display: flex;
   flex-flow: nowrap;
   justify-content: space-between;
@@ -10,6 +10,25 @@
 
   background: $itemBg;
   border-bottom: 1px solid $borderColor;
+}
+
+@include block("item") {
+  @extend %item;
+
+  // TODO: Prevent duplicate style
+  @include modifier("higher") {
+    @extend %item;
+    padding: 0.5em 0;
+
+    &:hover {
+      margin-bottom: 2px;
+      box-shadow: 0px 1px 2px 1px $shadowColor;
+
+      .item__control-button, .item__control-button--star { // TODO: Need to fix this
+        opacity: 1;
+      }
+    }
+  }
 
   @include element("input") {
     min-width: 100%;
@@ -75,6 +94,7 @@
     color: $deactiveColor;
 
     opacity: 0;
+    transition: ease-in 250ms;
 
     @include state("active") {
       color: $activeColor;
