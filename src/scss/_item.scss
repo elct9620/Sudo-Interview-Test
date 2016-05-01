@@ -6,6 +6,8 @@
   justify-content: space-between;
   align-items: center;
 
+  padding: 0 0.5em;
+
   color: $activeColor;
 
   background: $itemBg;
@@ -18,7 +20,7 @@
   // TODO: Prevent duplicate style
   @include modifier("higher") {
     @extend %item;
-    padding: 0.5em 0;
+    padding: 0.5em 0.5em;
 
     &:hover {
       margin-bottom: 2px;
@@ -35,6 +37,7 @@
     padding: 1em 1.25em;
 
     border: none;
+    background: transparent;
     color: $activeColor;
 
     @include state("completed") {
@@ -48,7 +51,11 @@
   }
 
   @include element("entry") {
-    width: 100%; // Fill remain space
+    width: 80%; // Fill remain space
+
+    @include breakpoint(sm) {
+      width: 100%;
+    }
   }
 
   @include element("complete") {

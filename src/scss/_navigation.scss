@@ -6,10 +6,22 @@
   overflow: hidden;
   zoom: 0;
 
+  font-size: 14px;
+  font-size: 0.875rem;
+
+  @include breakpoint(sm) {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+
   @include element('list') {
     clear: both;
+    padding: 0;
+    margin-left: 0;
+    margin-top: 0;
 
     list-style: none;
+    text-align: center;
   }
 
   @include element('item') {

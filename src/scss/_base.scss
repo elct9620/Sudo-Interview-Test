@@ -19,8 +19,16 @@ body {
 
 #todo-list {
   // Constraint width, and centered
-  width: 40%;
+  width: 80%;
   margin: 2em auto;
+
+  @include breakpoint(sm) {
+    width: 60%;
+  }
+
+  @include breakpoint(md) {
+    width: 40%;
+  }
 }
 
 #header {
