@@ -94,7 +94,8 @@
     color: $deactiveColor;
 
     opacity: 0;
-    transition: ease-in 250ms;
+    transition: opacity ease-out 250ms;
+    will-change: opacity;
 
     @include state("active") {
       color: $activeColor;
@@ -132,4 +133,27 @@
     }
   }
 
+}
+
+// CSS Transition
+.todo-item {
+  &-enter, &-appear {
+    max-height: 0;
+    will-change: height, max-height;
+
+    &.todo-item-enter-active, &.todo-item-appear-active {
+      max-height: 500px;
+      transition: 500ms ease-in;
+    }
+  }
+
+  &-leave {
+    max-height: 500px;
+    will-change: height, max-height;
+
+    &.todo-item-leave-active {
+      max-height: 0;
+      transition: 300ms ease-out;
+    }
+  }
 }

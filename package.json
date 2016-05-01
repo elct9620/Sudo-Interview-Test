@@ -4,7 +4,8 @@
   "description": "The interview test answser for Sudo.",
   "main": "src/app.jsx",
   "dependencies": {
-    "immutable": "^3.8.1"
+    "immutable": "^3.8.1",
+    "react-addons-css-transition-group": "^15.0.2"
   },
   "devDependencies": {
     "aoi": "0.0.1",
