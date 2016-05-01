@@ -108,13 +108,15 @@ class SimpleStore extends EventEmitter{
      */
 
     update(todo, content) {
-        this.tasks = this.tasks.map((task, index) => {
-            if(todo == task) {
-                return new Todo(content, todo.completed, todo.starred);
-            }
-            return task;
-        });
-        this.saveTask();
+        if(content && content.length > 0) { // Save only todo has content
+            this.tasks = this.tasks.map((task, index) => {
+                if(todo == task) {
+                    return new Todo(content, todo.completed, todo.starred);
+                }
+                return task;
+            });
+            this.saveTask();
+        }
         this.emit("update", this.tasks);
     }
 
